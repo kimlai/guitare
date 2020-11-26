@@ -1,0 +1,27 @@
+body {
+  font-family: sans-serif;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+main > * + * {
+  margin-top: 2rem;
+}
+
+#note {
+  font-size: 15rem;
+  width: 2ch;
+}
+
+#button {
+  font-size: 2rem;
+}
+
+#notes {
+  display: flex;
+}
+
+#notes > * {
+  padding: 0.25rem;
+}
