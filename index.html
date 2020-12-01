@@ -1,34 +1,26 @@
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+---
+title: Exercice de guitare
+---
 
-    <title>Exercices de guitare</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-
-  <body>
-    <main>
-      <h1>Exercices de guitare</h1>
-      <ul>
-        <li>
-          <h2>Connaître le manche</h2>
-          <p>
-            Une série d'exercices pour apprendre à connaître les notes sur tout
-            le manche de la guitare.
-          </p>
-          <a href="/fretboard">Voir les exercices</a>
-        </li>
-        <li>
-          <h2>"Play the changes"</h2>
-          <p>
-            Des morceaux à jouer sans backing track, avec un simple métronome.
-          </p>
-          <a href="/changes">Voir les morceaux</a>
-        </li>
-      </ul>
-    </main>
-  </body>
-</html>
+{% extends "layouts/base.html" %} {% block content %}
+<main>
+  <h1>Exercices de guitare</h1>
+  <ul>
+    <li>
+      <h2>Connaître le manche</h2>
+      <p>
+        Une série d'exercices pour apprendre à connaître les notes sur tout le
+        manche de la guitare.
+      </p>
+      <a href="/fretboard">Voir les exercices</a>
+    </li>
+    <li>
+      <h2>"Play the changes"</h2>
+      <p>
+        Des morceaux à jouer sans backing track, avec un simple métronome.
+      </p>
+      <a href="/changes">Voir les morceaux</a>
+    </li>
+  </ul>
+</main>
+{% endblock %}
