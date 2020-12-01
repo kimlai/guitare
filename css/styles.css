@@ -9,9 +9,17 @@ main {
   padding: 5rem 1rem;
 }
 
+main > * + * {
+  margin-top: 4rem;
+}
+
 ul[role="list"] {
   padding-left: 0;
   margin-left: 0;
+}
+
+a {
+  color: inherit;
 }
 
 .flow > * + * {
@@ -26,10 +34,6 @@ ul[role="list"] {
   min-height: 100vh;
   display: grid;
   place-items: center;
-}
-
-main > * + * {
-  margin-top: 2rem;
 }
 
 #note {
