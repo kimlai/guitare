@@ -48,3 +48,7 @@ main > * + * {
 #notes > * {
   padding: 0.25rem;
 }
+
+#current-chord {
+  font-size: 10rem;
+}

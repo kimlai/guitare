@@ -13,80 +13,46 @@ const chordsToBeats = chords =>
 
 const chords = chordsToBeats(grid);
 
-const audioContext = new AudioContext();
-let currentQuarterNote = 1;
+synth = new Tone.Synth({
+  oscillator: {
+    type: "sine",
+    modulationFrequency: 0.2
+  },
+  envelope: {
+    attack: 0,
+    decay: 0.1,
+    sustain: 0,
+    release: 0.1
+  }
+}).toMaster();
 
-const playPulse = beatNumber => {
-  const time = audioContext.currentTime;
-  const osc = audioContext.createOscillator();
-  const envelope = audioContext.createGain();
+Tone.Transport.bpm.value = 100;
 
-  osc.frequency.value = beatNumber % 2 === 1 ? 800 : 0;
-  envelope.gain.value = 1;
-  envelope.gain.exponentialRampToValueAtTime(1, time + 0.01);
-  envelope.gain.exponentialRampToValueAtTime(0.001, time + 0.05);
+let currentQuarterNote = 0;
 
-  osc.connect(envelope);
-  envelope.connect(audioContext.destination);
-
-  osc.start();
-  osc.stop(time + 0.03);
-};
-
-const notesInQueue = [];
-const scheduleNote = (beatNumber, time) => {
-  // push the note on the queue, even if we're not playing.
-  notesInQueue.push({ note: beatNumber, time: time });
-  playPulse(beatNumber);
-};
-
-const tempo = 120;
-let nextNoteTime = 0.0; // when the next note is due.
-const nextNote = () => {
-  const secondsPerBeat = 60.0 / tempo;
-
-  nextNoteTime += secondsPerBeat; // Add beat length to last beat time
-
+// loop on quarter notes
+const loop = new Tone.Loop(time => {
   // Advance the beat number, wrap to zero
   currentQuarterNote++;
   if (currentQuarterNote === chords.length) {
     currentQuarterNote = 0;
   }
-};
-
-let lastNoteDrawn;
-const draw = () => {
-  let drawNote = lastNoteDrawn;
-  let currentTime = audioContext.currentTime;
-
-  while (notesInQueue.length && notesInQueue[0].time < currentTime) {
-    drawNote = notesInQueue[0].note;
-    notesInQueue.splice(0, 1); // remove note from queue
+  if (currentQuarterNote % 2 === 1) {
+    synth.triggerAttackRelease(440, "32n");
   }
+  Tone.Draw.schedule(() => {
+    document.getElementById("current-chord").innerHTML =
+      chords[currentQuarterNote];
+    document.getElementById("current-beat").innerHTML =
+      (currentQuarterNote % 4) + 1;
+  }, time);
+}, "4n").start(0);
 
-  // We only need to draw if the note has moved.
-  if (lastNoteDrawn !== drawNote) {
-    document.getElementById("current-chord").innerHTML = chords[drawNote];
-    document.getElementById("current-beat").innerHTML = (drawNote % 4) + 1;
-    lastNoteDrawn = drawNote;
-  }
-  // set up to draw again
-  requestAnimationFrame(draw);
-};
-
-let scheduleAheadTime = 0.1;
-let lookahead = 25;
-
-const scheduler = () => {
-  // while there are notes that will need to play before the next interval,
-  // schedule them and advance the pointer.
-  while (nextNoteTime < audioContext.currentTime + scheduleAheadTime) {
-    scheduleNote(currentQuarterNote, nextNoteTime);
-    nextNote();
-  }
-
-  timerID = window.setTimeout(scheduler, lookahead);
-};
-
-scheduler(); // kick off scheduling
-requestAnimationFrame(draw); // start the drawing loop
+const play = document.getElementById("play-button");
+const pause = document.getElementById("pause-button");
+play.addEventListener("click", () => {
+  Tone.Transport.start();
+});
+pause.addEventListener("click", () => {
+  Tone.Transport.stop();
+});
