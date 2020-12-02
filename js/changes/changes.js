@@ -1,5 +1,3 @@
-// Stolen from https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Advanced_techniques
-
 const grid = [["Dm7", 4], ["G7", 4], ["CMaj7", 4], ["A7", 4]];
 
 const chordsToBeats = chords =>
@@ -38,7 +36,7 @@ const loop = new Tone.Loop(time => {
     currentQuarterNote = 0;
   }
   if (currentQuarterNote % 2 === 1) {
-    synth.triggerAttackRelease(440, "32n");
+    synth.triggerAttackRelease(440, "8n", time);
   }
   Tone.Draw.schedule(() => {
     document.getElementById("current-chord").innerHTML =
@@ -46,12 +44,12 @@ const loop = new Tone.Loop(time => {
     document.getElementById("current-beat").innerHTML =
       (currentQuarterNote % 4) + 1;
   }, time);
-}, "4n").start(0);
+}, "4n").start("+0.5");
 
 const play = document.getElementById("play-button");
 const pause = document.getElementById("pause-button");
 play.addEventListener("click", () => {
-  Tone.Transport.start();
+  Tone.Transport.start("+0.5");
 });
 pause.addEventListener("click", () => {
   Tone.Transport.stop();
