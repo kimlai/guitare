@@ -1,4 +1,4 @@
-const grid = [["Dm7", 4], ["G7", 4], ["CMaj7", 4], ["A7", 4]];
+const grid = JSON.parse(changes);
 
 const chordsToBeats = chords =>
   chords.flatMap(([chord, duration]) => {

@@ -1,0 +1,59 @@
+---
+pagination:
+  data: standards
+  size: 1
+  alias: standard
+  addAllPagesToCollections: true
+permalink: "changes/{{ standard.name | slug }}/"
+tags: standards
+eleventyComputed:
+  name: "{{ standard.name }}"
+---
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Make the changes</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/tone@14.7.58/build/Tone.min.js"></script>
+  </head>
+
+  <body>
+    <main class="changes">
+      <h1>{{ standard.name }}</h1>
+      <section class="with-sidebar">
+        <div>
+          <div class="controls">
+            <div>
+              <button id="play-button">Play</button
+              ><button class="inactive" id="pause-button">Pause</button>
+            </div>
+            <div>
+              <label for="bpm-slider">BPM</label>
+              <input
+                value="100"
+                id="bpm-slider"
+                type="range"
+                min="60"
+                max="220"
+                step="10"
+              />
+              <span id="bpm">100</span>
+            </div>
+          </div>
+          <div>
+            <div id="current-chord"></div>
+            <div id="current-beat"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+      <script>
+        const changes = '{{ standard.changes | json | safe }}';
+      </script>
+    <script src="/js/changes/changes.js"></script>
+  </body>
+</html>

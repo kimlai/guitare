@@ -26,8 +26,12 @@ a {
   color: inherit;
 }
 
+h1 {
+  font-size: 2.5em;
+}
+
 .flow > * + * {
-  margin-top: 3rem;
+  margin-top: 4rem;
 }
 
 .with-sidebar {
@@ -53,7 +57,16 @@ a {
 }
 
 .card > * + * {
-  margin-top: 0.75rem;
+  margin-top: 1rem;
+}
+
+.cta {
+  background: black;
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  display: inline-block;
+  font-weight: 600;
 }
 
 .fretboard {
@@ -79,6 +92,14 @@ a {
   padding: 0.25rem;
 }
 
+ul.standards-list {
+  font-size: 1.25rem;
+}
+
+ul.standards-list > * + * {
+  margin-top: 1rem;
+}
+
 .changes > section {
   border: 3px solid;
 }
@@ -97,6 +118,12 @@ a {
 
 #current-chord {
   font-size: 8rem;
+  text-align: center;
+}
+#current-beat {
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 2rem;
 }
 
 button {
