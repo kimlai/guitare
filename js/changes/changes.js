@@ -24,7 +24,14 @@ synth = new Tone.Synth({
   }
 }).toMaster();
 
-Tone.Transport.bpm.value = 100;
+const bpmSlider = document.getElementById("bpm-slider");
+const bpm = document.getElementById("bpm");
+bpmSlider.addEventListener("input", e => {
+  Tone.Transport.bpm.value = e.target.value;
+  bpm.innerHTML = e.target.value;
+});
+
+Tone.Transport.bpm.value = bpmSlider.value;
 
 let currentQuarterNote = 0;
 
