@@ -35,6 +35,10 @@ Tone.Transport.bpm.value = bpmSlider.value;
 
 let currentQuarterNote = 0;
 
+document.getElementById("current-chord").innerHTML = chords[currentQuarterNote];
+document.getElementById("current-beat").innerHTML =
+  (currentQuarterNote % 4) + 1;
+
 // loop on quarter notes
 const loop = new Tone.Loop(time => {
   // Advance the beat number, wrap to zero
@@ -57,7 +61,11 @@ const play = document.getElementById("play-button");
 const pause = document.getElementById("pause-button");
 play.addEventListener("click", () => {
   Tone.Transport.start("+0.5");
+  play.classList.add("active");
+  pause.classList.remove("active");
 });
 pause.addEventListener("click", () => {
   Tone.Transport.stop();
+  pause.classList.add("active");
+  play.classList.remove("active");
 });

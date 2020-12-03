@@ -9,6 +9,10 @@ main {
   padding: 5rem 1rem;
 }
 
+main.changes {
+  max-width: 100ch;
+}
+
 main > * + * {
   margin-top: 4rem;
 }
@@ -24,6 +28,28 @@ a {
 
 .flow > * + * {
   margin-top: 3rem;
+}
+
+.with-sidebar {
+  overflow: hidden;
+  --sidebar-margin: 0;
+}
+
+.with-sidebar > * {
+  display: flex;
+  flex-wrap: wrap;
+  margin: calc(var(--sidebar-margin) / 2 * -1);
+}
+
+.with-sidebar > * > * {
+  margin: calc(var(--sidebar-margin) / 2);
+  flex-grow: 1;
+}
+
+.with-sidebar > * > :last-child {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-width: calc(50% - var(--sidebar-margin));
 }
 
 .card > * + * {
@@ -53,6 +79,35 @@ a {
   padding: 0.25rem;
 }
 
+.changes > section {
+  border: 3px solid;
+}
+
+.changes > .with-sidebar > div > * {
+  padding: 4rem;
+}
+
+.controls {
+  outline: 3px solid;
+}
+
+.controls > * + * {
+  margin-top: 2rem;
+}
+
 #current-chord {
-  font-size: 10rem;
+  font-size: 8rem;
+}
+
+button {
+  background: white;
+  outline: 3px solid black;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+button.active {
+  background: black;
+  color: white;
 }
