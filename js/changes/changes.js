@@ -9,6 +9,14 @@ const chordsToBeats = chords =>
     return res;
   });
 
+const renderChord = chord => {
+  [root, extensions] = chord.split("_");
+  return `${renderNote(root)}<span class="extensions">${extensions}</span>`;
+};
+
+const renderNote = note =>
+  note.replace("b", "<sup>b</sup>").replace("#", "<sup>#</sup>");
+
 const chords = chordsToBeats(grid);
 
 synth = new Tone.Synth({
@@ -35,7 +43,9 @@ Tone.Transport.bpm.value = bpmSlider.value;
 
 let currentQuarterNote = 0;
 
-document.getElementById("current-chord").innerHTML = chords[currentQuarterNote];
+document.getElementById("current-chord").innerHTML = renderChord(
+  chords[currentQuarterNote]
+);
 document.getElementById("current-beat").innerHTML =
   (currentQuarterNote % 4) + 1;
 
@@ -50,8 +60,9 @@ const loop = new Tone.Loop(time => {
     synth.triggerAttackRelease(440, "8n", time);
   }
   Tone.Draw.schedule(() => {
-    document.getElementById("current-chord").innerHTML =
-      chords[currentQuarterNote];
+    document.getElementById("current-chord").innerHTML = renderChord(
+      chords[currentQuarterNote]
+    );
     document.getElementById("current-beat").innerHTML =
       (currentQuarterNote % 4) + 1;
   }, time);
