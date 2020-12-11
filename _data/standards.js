@@ -11,7 +11,8 @@ module.exports = [
     name: "Blues Bb",
     // prettier-ignore
     changes: [
-      ["Bb_Maj7", 4], ["Eb_7", 4], ["Bb_Maj7", 4], ["Bb_7", 4],
+      ["Bb_7", 4], ["Eb_7", 4], ["Bb_7", 4], ["Bb_7", 4],
+      ["Eb_7", 4], ["Eb_7", 4], ["Bb_7", 4], ["Bb_7", 4],
       ["F_7", 4], ["Eb_7", 4], ["Bb_7", 4], ["F_7", 4]
     ]
   }
