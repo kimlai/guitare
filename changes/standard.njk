@@ -9,51 +9,45 @@ tags: standards
 eleventyComputed:
   name: "{{ standard.name }}"
 ---
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+{% extends "layouts/base.html" %}
 
-    <title>Make the changes</title>
-    <link rel="stylesheet" href="/css/styles.css" />
-    <script src="https://cdn.jsdelivr.net/npm/tone@14.7.58/build/Tone.min.js"></script>
-  </head>
+{% block extra_js %}
+  <script src="https://cdn.jsdelivr.net/npm/tone@14.7.58/build/Tone.min.js"></script>
+{% endblock %}
 
-  <body>
-    <main class="changes">
-      <section class="with-sidebar">
-        <div>
-          <div class="controls">
-            <h1>{{ standard.name }}</h1>
-            <div>
-              <button id="play-button">Play</button
-              ><button class="inactive" id="pause-button">Pause</button>
-            </div>
-            <div class="bpm-controls">
-              <label for="bpm-slider">BPM</label>
-              <input
-                value="100"
-                id="bpm-slider"
-                type="range"
-                min="60"
-                max="220"
-                step="10"
-              />
-              <span id="bpm">100</span>
-            </div>
-          </div>
+{% block content %}
+  <main class="changes">
+    <h1>{{ standard.name }}</h1>
+    <section class="with-sidebar">
+      <div>
+        <div class="controls">
           <div>
-            <div id="current-chord"></div>
-            <div id="current-beat"></div>
+            <button id="play-button">Play</button
+            ><button class="inactive" id="pause-button">Pause</button>
+          </div>
+          <div class="bpm-controls">
+            <label for="bpm-slider">BPM</label>
+            <input
+              value="100"
+              id="bpm-slider"
+              type="range"
+              min="60"
+              max="220"
+              step="10"
+            />
+            <span id="bpm">100</span>
           </div>
         </div>
-      </section>
-    </main>
-      <script>
-        const changes = '{{ standard.changes | json | safe }}';
-      </script>
-    <script src="/js/changes/changes.js"></script>
-  </body>
-</html>
+        <div>
+          <div id="current-chord"></div>
+          <div id="current-beat"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+    <script src="https://cdn.jsdelivr.net/npm/tone@14.7.58/build/Tone.min.js"></script>
+    <script>
+      const changes = '{{ standard.changes | json | safe }}';
+    </script>
+  <script src="/js/changes/changes.js"></script>
+{% endblock %}

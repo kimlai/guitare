@@ -1,26 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Make the changes</title>
-    <link rel="stylesheet" href="/css/styles.css" />
-    <script src="https://cdn.jsdelivr.net/npm/tone@14.7.58/build/Tone.min.js"></script>
-  </head>
-
-  <body>
-    <main>
-      <h1>"Play the changes"</h1>
-      <ul class="standards-list">
-        {% for standard in collections.standards %}
-        <li>
-          <a href="{{ standard.url }}">{{ standard.data.name }}</a>
-        </li>
-        {% endfor %}
-      </ul>
-    </main>
-    <script src="/js/changes/changes.js"></script>
-  </body>
-</html>
+{% extends "layouts/base.html" %} {% block content %}
+<main>
+  <h1>"Play the changes"</h1>
+  <ul class="standards-list">
+    {% for standard in collections.standards %}
+    <li>
+      <a href="{{ standard.url }}">{{ standard.data.name }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</main>
+{% endblock %}
